@@ -71,7 +71,7 @@ const Title = styled.h1`
         }      
     }
     @media (min-width: 1024px) {
-        width: 300px;
+        width: 260px;
         font-size: 2rem;
     }
 `;
