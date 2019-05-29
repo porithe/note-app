@@ -6,8 +6,11 @@ import { connect } from 'react-redux';
 const CompBlock = styled.div`
     width: 300px;
     height: 300px;
-    margin: 0 auto;
+    margin: 0 auto 20px auto;
     border: 2px solid ${colors.white};
+    @media (min-width: 768px) {
+        width: 400px;
+    }
 `;
 const FormBlock = styled.form`
     width: 100%;
@@ -31,6 +34,9 @@ const InputTitle = styled.input`
     ::placeholder {
         color: rgba(245,245,245 ,0.7);
     }
+    @media (min-width: 768px) {
+        width: 240px;
+    }
 `;
 const InputBody = styled.textarea`
     width: 220px;
@@ -44,6 +50,9 @@ const InputBody = styled.textarea`
     ::placeholder {
         color: rgba(245,245,245 ,0.7);
     }
+    @media (min-width: 768px) {
+        width: 340px;
+    }
 `;
 const Button = styled.button`
     width: 145px;
@@ -55,6 +64,11 @@ const Button = styled.button`
     border-radius: 12px 12px;
     font-size: 1.6rem;
     padding: 10px;
+    cursor: pointer;
+    transition: .3s;
+    :hover {
+        box-shadow: 0 0 7px 0 ${colors.white};
+    }
 `;
 
 class Form extends Component {
@@ -74,16 +88,17 @@ class Form extends Component {
 
     addNote = e => {
         e.preventDefault();
-        let itemsObject = {
-            title: this.state.title,
-            description: this.state.description,
-            id: this.state.id,
-        };
-        console.log(this.state.id);
-        this.props.dispatch({
-            type: "ADD NOTE",
-            item: itemsObject,
-        });
+        if ( this.state.title !== '' && this.state.description !== '') {
+            let itemsObject = {
+                title: this.state.title,
+                description: this.state.description,
+                id: this.state.id,
+            };
+            this.props.dispatch({
+                type: "ADD NOTE",
+                item: itemsObject,
+            });
+        }
         this.setState({
             title: '',
             description: '',

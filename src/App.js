@@ -11,14 +11,16 @@ const defaultState = {
 };
 
 function reducer(state = defaultState, action) {
-    console.log("reducer", state, action);
-
     switch(action.type) {
         case 'ADD NOTE':
             return {
                 ...state,
                 items: [...state.items, action.item ],
             };
+        case 'DEL NOTE':
+            return Object.assign({}, state, {
+                items: [...state.items.filter(item => item.id !== action.id)],
+            });
         default: {
             return state;
         }
@@ -32,6 +34,7 @@ const Application = styled.div`
   width: 100%;
   min-height: 100%;
   padding-top: 30px;
+  padding-bottom: 20px;
 `;
 
 function App() {
